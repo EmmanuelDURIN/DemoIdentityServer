@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiIdentityServer", "ApiIdentityServer\ApiIdentityServer.csproj", "{0066DBE5-0E6A-4607-A14F-DC1AC2FAF891}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiIdentityServer", "ApiIdentityServer\ApiIdentityServer.csproj", "{0066DBE5-0E6A-4607-A14F-DC1AC2FAF891}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImplicitFlowMvcClient", "ImplicitFlowMvcClient\ImplicitFlowMvcClient.csproj", "{445BCA05-3B48-4D39-AB86-66DD220CBA15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0066DBE5-0E6A-4607-A14F-DC1AC2FAF891}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0066DBE5-0E6A-4607-A14F-DC1AC2FAF891}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0066DBE5-0E6A-4607-A14F-DC1AC2FAF891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{445BCA05-3B48-4D39-AB86-66DD220CBA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{445BCA05-3B48-4D39-AB86-66DD220CBA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{445BCA05-3B48-4D39-AB86-66DD220CBA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{445BCA05-3B48-4D39-AB86-66DD220CBA15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

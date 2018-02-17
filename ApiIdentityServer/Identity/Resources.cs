@@ -36,6 +36,7 @@ namespace ApiIdentityServer.Identity
               Description = "Course API Access",
               UserClaims = new List<string> {"role"},
               // la sécurisation des ressources par mdp sert à éviter la vérification des tokens en libre service
+              // seuls les clients possesseurs de API peuvent vérifier le scope dans un token
               ApiSecrets = new List<Secret> {new Secret("sc0pe$ecret".Sha256())},
               Scopes = new List<Scope> {
                 new Scope(CourseApiRead),
