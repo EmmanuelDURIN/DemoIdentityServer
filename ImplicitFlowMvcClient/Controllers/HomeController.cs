@@ -26,7 +26,16 @@ namespace ImplicitFlowMvcClient.Controllers
     public IActionResult Contact()
     {
       ViewData["Message"] = "Your contact page.";
-
+      foreach (System.Security.Claims.Claim c in ((System.Security.Claims.ClaimsIdentity)this.HttpContext.User.Identity).Claims )
+      {
+        
+        Debug.WriteLine(c.Type);
+        Debug.WriteLine(c.Value);
+        foreach( var pair in c?.Properties)
+        {
+          Debug.WriteLine($"\t{pair.Key} {pair.Value}");
+        }
+      }
       return View();
     }
 
