@@ -38,10 +38,10 @@ namespace ApiIdentityServer.Identity
           // A mettre à jour plus tard avec l’adresse du client
           // Il peut avoir plusieurs Url par client. 
           // Mais la redirection demandée par le login ne sera faite que vers une url de cette liste
-          RedirectUris = new List<string> {"http://localhost:44362/signin-oidc"},
-          PostLogoutRedirectUris = new List<string> {"http://localhost:44362"}
-          //RedirectUris = new List<string> {"https://localhost:44361/signin-oidc"},
-          //PostLogoutRedirectUris = new List<string> {"https://localhost:44361"}
+          //RedirectUris = new List<string> {"http://localhost:44362/signin-oidc"},
+          //PostLogoutRedirectUris = new List<string> {"http://localhost:44362"}
+          RedirectUris = new List<string> {"https://localhost:44315/signin-oidc"},
+          PostLogoutRedirectUris = new List<string> {"https://localhost:44315"}
         }
     };
     }
