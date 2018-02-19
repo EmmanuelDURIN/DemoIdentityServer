@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using ApiIdentityServer.Identity;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace ApiIdentityServer
 {
@@ -30,14 +31,21 @@ namespace ApiIdentityServer
     public void ConfigureServices(IServiceCollection services)
     {
       var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-
+      services.AddDbContext<ApplicationDbContext>
+        (builder =>
+          builder.UseSqlServer(connectionString,
+                               sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly)
+          )
+        );
+      services.AddIdentity<IdentityUser, IdentityRole>()
+        .AddEntityFrameworkStores<ApplicationDbContext>();
       services.AddIdentityServer()
       //.AddInMemoryIdentityResources(Resources.GetIdentityResources())
       //.AddInMemoryApiResources(Resources.GetApiResources())
       //.AddInMemoryClients(Clients.Get())
-      .AddTestUsers(Users.Get())
-      
-        // Client and scope stores
+      //.AddTestUsers(Users.Get())
+     
+      // Client and scope stores
       .AddConfigurationStore(options => options.ConfigureDbContext = builder =>
             builder.UseSqlServer(connectionString,
                                  sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly)))
@@ -47,16 +55,10 @@ namespace ApiIdentityServer
           options => options.ConfigureDbContext = builder =>
           builder.UseSqlServer(connectionString, sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly))
         )
+      .AddAspNetIdentity<IdentityUser>()
       // on peut utiliser un certificate auto signé, il est exposé par le point de 
       // terminaison de découverte : à l’adresse indiquée par jwks_uri
       .AddDeveloperSigningCredential();
-
-      services.AddDbContext<ApplicationDbContext>
-        (builder =>
-          builder.UseSqlServer(connectionString,
-                               sqlOptions => sqlOptions.MigrationsAssembly(migrationsAssembly)
-          )
-        );
 
       services.AddMvc();
     }

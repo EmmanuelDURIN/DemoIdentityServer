@@ -25,11 +25,7 @@ namespace ImplicitFlowMvcClient.Controllers
     [Authorize]
     public IActionResult Contact()
     {
-      //var userInfoClient = new UserInfoClient(doc.UserInfoEndpoint, token);
-      //var response = await userInfoClient.GetAsync();
-      //var claims = response.Claims;
-      //await GetClaims();
-      ViewData["Message"] = "Your contact page.";
+      ViewData["Message"] = "Your claims :";
       foreach (System.Security.Claims.Claim c in ((System.Security.Claims.ClaimsIdentity)this.HttpContext.User.Identity).Claims )
       {
         Debug.WriteLine(c.Type);
@@ -41,15 +37,6 @@ namespace ImplicitFlowMvcClient.Controllers
       }
       return View();
     }
-
-    //private async Task GetClaims()
-    //{
-    //  String id_token = Request.Form["id_token"];
-    //  var client = new System.Net.Http.HttpClient { BaseAddress = new Uri("https://localhost:44397/") };
-    //  var responseMessage = await client.GetAsync("connect/userinfo");
-    //  string claims = await responseMessage.Content.ReadAsStringAsync();
-    //}
-
     public IActionResult Error()
     {
       return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
