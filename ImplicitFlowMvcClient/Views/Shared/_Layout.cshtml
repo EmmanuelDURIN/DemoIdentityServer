@@ -25,6 +25,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+                    @if ( User.Identity.IsAuthenticated)
+                    {
+                    <span class="icon-bar"></span>
+                    }
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ImplicitFlowMvcClient</a>
             </div>
@@ -33,6 +37,10 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="Logout">Logout @(((System.Security.Claims.ClaimsIdentity)User.Identity).FindFirst("name").Value)</a></li>
+                    }
                 </ul>
             </div>
         </div>
