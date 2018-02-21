@@ -44,7 +44,7 @@ namespace ApiIdentityServer
       //.AddInMemoryApiResources(Resources.GetApiResources())
       //.AddInMemoryClients(Clients.Get())
       //.AddTestUsers(Users.Get())
-     
+
       // Client and scope stores
       .AddConfigurationStore(options => options.ConfigureDbContext = builder =>
             builder.UseSqlServer(connectionString,
@@ -61,12 +61,27 @@ namespace ApiIdentityServer
       .AddDeveloperSigningCredential();
 
       services.AddMvc();
+
+      // code existant ..
+      services.AddCors(options =>
+      {
+        // this defines a CORS policy called "default"
+        options.AddPolicy("default", policy =>
+        {
+          policy.WithOrigins("https://localhost:44340")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+        });
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
+      app.UseCors("default");
+
       app.InitializeDbTestData();
+      app.CreateSpaClient();
       loggerFactory.AddConsole(LogLevel.Trace);
       loggerFactory.AddDebug(LogLevel.Trace);
       if (env.IsDevelopment())

@@ -1,18 +1,55 @@
-﻿using IdentityServer4.EntityFramework.DbContexts;
+﻿using IdentityServer4;
+using IdentityServer4.EntityFramework.DbContexts;
+//using IdentityServer4.EntityFramework.Entities;
 using IdentityServer4.EntityFramework.Mappers;
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using static IdentityModel.OidcConstants;
 
 namespace ApiIdentityServer.Identity
 {
   public static class InitializeIdentitiesExtension
   {
+    public static void CreateSpaClient(this IApplicationBuilder app)
+    {
+      using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+      {
+        Client spaClient = new Client
+        {
+          ClientId = "js",
+          ClientName = "JS Client",
+          AllowedGrantTypes = IdentityServer4.Models.GrantTypes.Implicit,
+          AllowAccessTokensViaBrowser = true,
+
+          AllowedScopes = new List<string>
+          {
+              IdentityServerConstants.StandardScopes.OpenId,
+              IdentityServerConstants.StandardScopes.Profile,
+//              "role",
+              //Resources.CourseApiWrite,
+              Resources.CourseApiRead
+          },
+          AllowedCorsOrigins = { "https://localhost:44340" },
+          //RedirectUris = { "https://localhost:44340/index.html" },
+          //PostLogoutRedirectUris = { "https://localhost:44340/callback.html" }
+          RedirectUris = { "https://localhost:44340/callback.html" },
+          PostLogoutRedirectUris = { "https://localhost:44340/index.html" }
+        };
+        using (var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>())
+        {
+          if (!context.Clients.Any(c => c.ClientId == spaClient.ClientId))
+          {
+            context.Clients.Add(spaClient.ToEntity());
+            context.SaveChanges();
+          }
+        }
+      }
+    }
     public static void InitializeDbTestData(this IApplicationBuilder app)
     {
       using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())

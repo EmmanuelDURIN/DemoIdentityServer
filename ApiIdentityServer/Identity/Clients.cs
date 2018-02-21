@@ -42,7 +42,7 @@ namespace ApiIdentityServer.Identity
           //PostLogoutRedirectUris = new List<string> {"http://localhost:44362"}
           RedirectUris = new List<string> {"https://localhost:44315/signin-oidc"},
           PostLogoutRedirectUris = new List<string> {"https://localhost:44315"}
-        }
+        },
     };
     }
   }
