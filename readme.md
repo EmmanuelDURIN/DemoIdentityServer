@@ -1,6 +1,6 @@
 # Demonstration of IdentityServer 4 in ASP.Net Core Servers
 
-## Featuring many servers for separation of concerns
+Featuring many servers for separation of concerns
 	
 ## ApiIdentityServer 
 	
@@ -20,8 +20,8 @@
 ## SPAImplicitClient
 
  - Basic spa client calling Rest apis from CoursesWebApi.
- - Implicit flow grant client is used
- - Logout is provided
+ - Implicit flow grant client is used with oidc-client.js (Logout is provided)
+ 
 
 
 
