@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoursesWebApi.Policy;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,12 +28,25 @@ namespace CoursesWebApi
       services.AddMvcCore()
               .AddAuthorization
               (
-                options => {
+                options => 
+                {
                   // require courseAPI.write
-                  options.AddPolicy("courseWritePolicy", builder =>
-                  {
-                    builder.RequireClaim("scope", "courseAPI.write");
-                  });
+                    options.AddPolicy("courseWritePolicy", builder =>
+                      builder.RequireClaim("scope", "courseAPI.write")
+                    );
+                    options.AddPolicy(
+                        "NoMoreThanTwice",
+                        //context => NbRequests < 10
+                        policyBuilder => policyBuilder.AddRequirements(new NoMoreThanNTimes(2))
+
+                        // Policy based on assertion :
+                        //policyBuilder => policyBuilder.RequireAssertion(
+                            //context => context.User.HasClaim(claim =>
+                            //            claim.Type == "VIPNumber"
+                            //            || claim.Type == "EmployeeNumber")
+                            //            || context.User.IsInRole("CEO")
+                            //            )
+                    );
                 }
               )
               .AddJsonFormatters();
@@ -56,6 +71,8 @@ namespace CoursesWebApi
               .AllowAnyMethod();
         });
       });
+
+      services.AddSingleton<IAuthorizationHandler, NoMoreThanNTimesHandler>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

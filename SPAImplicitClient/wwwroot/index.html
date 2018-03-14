@@ -8,6 +8,7 @@
     <button id="login">Login</button>
     <button id="readApi">Call Read API</button>
     <button id="writeApi">Call Create API</button>
+    <button id="trialApi">Call Trial API - no more than two times</button>
     <button id="logout">Logout</button>
 
     <pre id="results"></pre>
@@ -44,7 +45,7 @@
 
             function readCourses() {
                 mgr.getUser().then(function (user) {
-                    // Url du serveur de l'API Web - 
+                    // Url du serveur de l'API Web -
                     // TODO : A CHANGER
                     var url = "https://localhost:44389/api/courses";
 
@@ -59,7 +60,7 @@
             }
             function createCourse() {
                 mgr.getUser().then(function (user) {
-                    // Url du serveur de l'API Web - 
+                    // Url du serveur de l'API Web -
                     // TODO : A CHANGER
                     var url = "https://localhost:44389/api/courses";
 
@@ -72,11 +73,33 @@
                             log(xhr.status);
                     }
                     xhr.onerror = function () {
-                        log("Comunication error");
+                        log("Communication error");
                     };
                     xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
                     xhr.setRequestHeader("Content-type", "application/json");
-                    xhr.send(JSON.stringify({ title:"Web api", duration:3, code:"wea" }));
+                    xhr.send(JSON.stringify({ title: "Web api", duration: 3, code: "wea" }));
+                });
+            }
+            function callTrial() {
+                mgr.getUser().then(function (user) {
+                    // Url du serveur de l'API Web -
+                    // TODO : A CHANGER
+                    var url = "https://localhost:44389/api/trial";
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", url);
+                    xhr.onload = function () {
+                        if (xhr.status === 2)
+                            log(xhr.responseText);
+                        else
+                            log(xhr.status);
+                    }
+                    xhr.onerror = function () {
+                        log("Communication error");
+                    };
+                    xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
+                    xhr.setRequestHeader("Content-type", "application/json");
+                    xhr.send();
                 });
             }
             function logout() {
@@ -86,6 +109,7 @@
             document.getElementById("login").addEventListener("click", login, false);
             document.getElementById("readApi").addEventListener("click", readCourses, false);
             document.getElementById("writeApi").addEventListener("click", createCourse, false);
+            document.getElementById("trialApi").addEventListener("click", callTrial, false);
             document.getElementById("logout").addEventListener("click", logout, false);
         })();
     </script>
