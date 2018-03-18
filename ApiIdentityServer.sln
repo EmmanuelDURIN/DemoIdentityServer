@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiIdentityServer", "ApiIdentityServer\ApiIdentityServer.csproj", "{0066DBE5-0E6A-4607-A14F-DC1AC2FAF891}"
 EndProject
@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImplicitFlowMvcClient", "Im
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPAImplicitClient", "SPAImplicitClient\SPAImplicitClient.csproj", "{1E431E1D-2B47-431B-AC96-8B32CF4B6EB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoursesWebApi", "CoursesWebApi\CoursesWebApi.csproj", "{3D2A2A9A-C7CF-4FA7-BD66-D73C4660DDF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoursesWebApi", "CoursesWebApi\CoursesWebApi.csproj", "{3D2A2A9A-C7CF-4FA7-BD66-D73C4660DDF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBD45B08-A199-4D61-90CE-4A615788423E}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
