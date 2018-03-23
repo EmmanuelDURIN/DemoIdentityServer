@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "73edb160-d1f3-879c-5f11-a0f5a751e513",
+		"name": "IdentityServerSTW",
+		"description": "Requêtes sur l'exercice IdentityServer du cours Web Services Rest .net",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/.well-known/openid-configuration",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/.well-known/openid-configuration",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						".well-known",
+						"openid-configuration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/connect/token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "courseAPI.read",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "oauthClient",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "p@$$w0rd",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/connect/token",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/connect/introspect",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "sc0pe$ecret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "courseAPI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjA4MGEyNThkMzgxNmVkYjc2NGFjNDQwOWVhNTIxNDViIiwidHlwIjoiSldUIn0.eyJuYmYiOjE1MjE3OTAyNTIsImV4cCI6MTUyMTc5Mzg1MiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTciLCJhdWQiOlsiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzOTcvcmVzb3VyY2VzIiwiY291cnNlQVBJIl0sImNsaWVudF9pZCI6Im9hdXRoQ2xpZW50Iiwic2NvcGUiOlsiY291cnNlQVBJLnJlYWQiXX0.XbZzW3HuWUenbx_8Aa1MtD4bp18wrxCZm4_X-9Wis4tsb9VEAGptsUjqCl2yOdbZBUPOqs55iQVDVe1pYSvfiw6XQx3BBpWXa1XiKf8w82LaFyTnhRwsaMnVTN06IQnJjn4OkNomOafFe7E8UOP_iIHFmOq1gRiyTqxozr162D1TY0iXQ36ejIT44xFBLwArIzJdGQzrS13EEwe1XtGIF3jgPPUf1jS3zp3lfkv6inGST5YfnHh-zemOofPW6A6uh3554ypREsnXktMI5VfWgBRvF42ZkoDDskCr82xDdMo084UQ2IqcNGBMfHPfGOwr1JnmyFYyEAPF-ksBYDqyFw"
+				},
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/connect/introspect",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"connect",
+						"introspect"
+					]
+				},
+				"description": "Verification du token"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "66868b58-120c-4262-b2e5-dcfffd707ab0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f4e70def-62d7-4f67-bb72-fc27755cb764",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "7ad6561c-8f99-4d21-b7ec-2b346dfb8b08",
+			"key": "scheme",
+			"value": "https",
+			"type": "string",
+			"description": ""
+		},
+		{
+			"id": "d436cb3c-b495-46e0-b8ff-17a2e7d7214e",
+			"key": "port",
+			"value": "44329",
+			"type": "string",
+			"description": ""
+		},
+		{
+			"id": "64f48c79-f40a-4eac-88c7-1cb0c3683808",
+			"key": "host",
+			"value": "localhost",
+			"type": "string",
+			"description": ""
+		}
+	]
+}
